@@ -1,0 +1,448 @@
+\documentclass[a4paper]{article}
+\usepackage[
+	top=1.00in,
+	bottom=1.25in,
+	left=0.75in,
+	right=0.75in
+]{geometry}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{multirow}
+\newcommand{\specialcell}[2][c]{%
+	\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+% Used to allow [cc|c] in     \begin{pmatrix}[cc|c]...\end{pmatrix}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}
+}
+\makeatother
+
+\begin{document}
+	\title{DMTH237 Discrete Mathematics II --- Assignment 5}
+	\author{Christian Nassif-Haynes}
+	\date{\today}
+	\maketitle
+		
+	\begin{enumerate}
+		\item
+		\begin{enumerate}
+			\item The complementary function is
+			\begin{equation*}
+				a_n^{(c)} = c_1 4^n + c_2 3^n.
+			\end{equation*}
+			For a particular solution, let us try
+			\begin{equation*}
+				a_n^{(p)} = A2^n.
+			\end{equation*}
+			Then
+			\begin{equation*}
+				a_{n+1}^{(p)} = A2^{n+1} = 2A2^n
+			\end{equation*}
+			and
+			\begin{equation*}
+				a_{n+2}^{(p)} = A2^{n+2} = 4A2^n.
+			\end{equation*}
+			It follows that
+			\begin{equation*}
+				a_{n+2}^{(p)} - 7a_{n+1}^{(p)} + 12a_{n}^{(p)} = (4A - 14A + 12A) 2^n = 2 A 2^n = 2^n
+			\end{equation*}
+			if $A = \frac{1}{2}$. Hence
+			\begin{equation*}
+				a_n = a_n^{(c)} + a_n^{(p)} = c_1 4^n + c_2 3^n + 2^{n-1}.
+			\end{equation*}
+			
+			\item The complementary function is
+			\begin{equation*}
+				a_n^{(c)} = c_1 4^n + c_2 3^n.
+			\end{equation*}
+			For a particular solution, let us try
+			\begin{equation*}
+				a_n^{(p)} = A_0 + A_1 n + A_2 n^2.
+			\end{equation*}
+			Then
+			\begin{equation*}
+				a_{n+1}^{(p)} = A_0 + A_1 (n+1) + A_2 (n+1)^2 = A_0 + A_1 + A_2 + A_1 n + 2 A_2 n + A_2 n^2
+			\end{equation*}
+			and
+			\begin{equation*}
+				a_{n+2}^{(p)} = A_0 + A_1 (n+2) + A_2 (n+2)^2 = A_0 + 2 A_1 + 4 A_2 + A_1 n + 4 A_2 n + A_2 n^2.
+			\end{equation*}
+			It follows that
+			\begin{equation*}
+				a_{n+2}^{(p)} - 7a_{n+1}^{(p)} + 12a_{n}^{(p)} = (6 A_0 - 5 A_1 - 3 A_2) + (6 A_1 - 10 A_2) n + 6 A_2 n^2 = n^2
+			\end{equation*}
+			if $A_0 = \frac{17}{54}$, $A_1 = \frac{5}{18}$ and $A_2 = \frac{1}{6}$. Hence
+			\begin{equation*}
+				a_n = a_n^{(c)} + a_n^{(p)} = c_1 4^n + c_2 3^n + \frac{17}{54} + \frac{5}{18} n + \frac{1}{6} n^2.
+			\end{equation*}
+			
+			\item The complementary function is
+			\begin{equation*}
+				a_n^{(c)} = c_1 4^n + c_2 3^n.
+			\end{equation*}
+			For a particular solution, let us try
+			\begin{equation*}
+				a_n^{(p)} = (B_0 + B_1 n + B_2 n^2) B 2^n = (A_0 + A_1 n + A_2 n^2) 2^n.
+			\end{equation*}
+			Then
+			\begin{equation*}
+				a_{n+1}^{(p)} = \left(A_0 + A_1 (n+1) + A_2 (n+1)^2 \right) 2^{n+1} = (2 A_0 + 2 A_1 + 2 A_2 + 2 A_1 n + 4 A_2 n + 2 A_2 n^2) 2^n
+			\end{equation*}
+			and
+			\begin{equation*}
+				a_{n+2}^{(p)} = \left(A_0 + A_1 (n+2) + A_2 (n+2)^2 \right) 2^{n+2} = (4 A_0 + 8 A_1 + 16 A_2 + 4 A_1 n + 16 A_2 n + 4 A_2 n^2) 2^n.
+			\end{equation*}
+			It follows that
+			\begin{equation*}
+				a_{n+2}^{(p)} - 7a_{n+1}^{(p)} + 12a_{n}^{(p)} = \left( (2 A_0 - 6 A_1 + 2 A_2) + (2 A_1 - 12 A_2) n + 2 A_2 n^2 \right)  2^n = n^2 2^n
+			\end{equation*}
+			if $A_0 = \frac{17}{2}$, $A_1 = 3$ and $A_2 = \frac{1}{2}$. Hence
+			\begin{equation*}
+				a_n = a_n^{(c)} + a_n^{(p)} = c_1 4^n + c_2 3^n + \frac{17}{2} +  3 n + \frac{1}{2} n^2.
+			\end{equation*}
+			
+			\item The complementary function is
+			\begin{equation*}
+				a_n^{(c)} = c_1 2^n.
+			\end{equation*}
+			For a particular solution, let us try
+			\begin{equation*}
+				a_n^{(p)} = A_0 \cos n + A_1 \sin n.
+			\end{equation*}
+			Then
+			\begin{equation*}
+				a_{n+1}^{(p)} = A_0 \cos (n+1) + A_1 \sin (n+1).
+			\end{equation*}
+			It follows that
+			\begin{equation*}
+				a_{n+1}^{(p)} - 2 a_{n}^{(p)} = (A_0 \cos 1 - 2 A_0 + A_1 \sin 1) \cos n + (- A_0 \sin 1 - 2 A_1 + A_1 \cos 1) \sin n = \cos n
+			\end{equation*}
+			if
+			\begin{equation*}
+				A_0 = - \frac{\cos 1 - 2}{4 \cos 1 - 5}
+				\qquad \text{and} \qquad
+				A_1 = \frac{\sin 1}{5 - 4 \cos 1}.
+			\end{equation*}
+			Hence
+			\begin{equation*}
+				a_n = a_n^{(c)} + a_n^{(p)} = c_1 2^n + \frac{\cos 1 - 2}{5 - 4 \cos 1} \cos n + \frac{\sin 1}{5 - 4 \cos 1} \sin n.
+			\end{equation*}
+			
+			\item The complementary function is
+			\begin{equation*}
+				a_n^{(c)} = c_1 + c_2 5^n.
+			\end{equation*}
+			For a particular solution, let us try
+			\begin{equation*}
+				a_n^{(p)} = A_0 + A_1 n.
+			\end{equation*}
+			Then
+			\begin{equation*}
+				a_{n+1}^{(p)} = A_0 + A_1 (n + 1) = A_0 + A_1 + A_1 n
+			\end{equation*}
+			and
+			\begin{equation*}
+				a_{n+2}^{(p)} = A_0 + A_1 (n + 2) = A_0 + 2 A_1 + A_1 n.
+			\end{equation*}
+			But
+			\begin{equation*}
+				a_{n+2}^{(p)} - 7a_{n+1}^{(p)} + 12a_{n}^{(p)} = (- 4 A_1) + (0) n \ne n.
+			\end{equation*}
+			Now we try
+			\begin{equation*}
+				a_n^{(p)} = A_0 n + A_1 n^2.
+			\end{equation*}
+			Then
+			\begin{equation*}
+				a_{n+1}^{(p)} = A_0 (n + 1) + A_1 (n + 1)^2 = (A_0 + A_1) + (A_0 + 2 A_1) n + A_1 n^2
+			\end{equation*}
+			and
+			\begin{equation*}
+				a_{n+2}^{(p)} = A_0 (n + 2) + A_1 (n + 2)^2 = (2 A_0 + 4 A_1) + (A_0 + 4 A_1) n + A_1 n^2.
+			\end{equation*}
+			It follows that
+			\begin{equation*}
+				a_{n+2}^{(p)} - 6 a_{n+1}^{(p)} + 5 a_{n}^{(p)} = (- 4 A_0 - 2 A_1) - 8 A_1 n = n
+			\end{equation*}
+			if $A_0 = \frac{1}{16}$ and $A_1 = - \frac{1}{8}$. Hence
+			\begin{equation*}
+				a_n = a_n^{(c)} + a_n^{(p)} = c_1 + c_2 5^n + \frac{1}{16} n + \frac{1}{8} n^2.
+			\end{equation*}
+		\end{enumerate}
+		
+		\item
+		\begin{enumerate}
+			\item We have
+			\begin{equation}
+				a_n = 2 a_{n - 1} + 2^n - 1 \label{eq:rec1}
+			\end{equation}
+			with initial condition $a_0 = 0$. Rewriting and multiplying throughout by $X^n$, we obtain
+			\begin{equation*}
+				a_{n + 1} X^n - 2 a_{n} X^n = \left( 2^{n + 1} - 1 \right) X^n.
+			\end{equation*}
+			Summing over $n = 0, 1, 2, \ldots$ and multiplying throughout again by $X$, we obtain
+			\begin{equation*}
+				X \sum\limits_{n = 0}^{\infty} a_{n + 1} X^n - 2 X \sum\limits_{n = 0}^{\infty} a_{n} X^n = X \sum\limits_{n = 0}^{\infty} \left( 2^{n + 1} - 1 \right) X^n.
+			\end{equation*}
+			It follows that
+			\begin{equation}
+				(G(X) - a_0) - 2 X G(X) = X F(X) \label{eq:gs}
+			\end{equation}
+			where
+			\begin{equation*}
+				F(X) = \sum\limits_{n = 0}^{\infty} \left( 2^{n + 1} - 1 \right) X^n
+			\end{equation*}
+			is the generating function of the sequence $2^{n + 1} - 1$. The generating function of the sequence $2^{n + 1}$ is
+			\begin{equation*}
+				F_1(X) = 2 + 4 X + 8 X^2 + \ldots = 2 (1 + 2 X + 4 X^2 + \ldots) = \frac{2}{1 - 2 X},
+			\end{equation*}
+			while the generating function of the sequence $-1 = - (1^n)$ is
+			\begin{equation*}
+				F_2(X) = - 1 - 1 - 1 - \ldots = - (1 + 1 + 1 + \ldots) = - \frac{1}{1 - X}.
+			\end{equation*}
+			We therefore have
+			\begin{equation}
+				F(X) = F_1(X) + F_2(X) = \frac{2}{1 - 2 X} - \frac{1}{1 - X}. \label{eq:fs}
+			\end{equation}
+			On the other hand, substituting the initial conditions into \eqref{eq:gs} and combining with \eqref{eq:fs}, we have
+			\begin{equation*}
+				G(X) (1 - 2 X) = \frac{2 X}{1 - 2 X} - \frac{X}{1 - X}
+			\end{equation*}
+			which can be expressed as partial fractions in the form
+			\begin{equation*}
+				G(X) = \frac{1}{(1 - 2 X)^2} - \frac{2}{1 - 2 X} + \frac{1}{1 - X}.
+			\end{equation*}
+			It follows from the extended binomial theorem that the solution to the given recurrence relation in \eqref{eq:rec1} is
+			\begin{equation*}
+				a_n = 2^n (n + 1) - 2 \cdot 2^n + 1 = n 2^n - 2^n + 1
+			\end{equation*}
+			
+			\item We have
+			\begin{equation*}
+				t_{2^m} = a_m
+			\end{equation*}
+			so that
+			\begin{equation*}
+				t_{m} = a_{\log_2 m} = (\log_2 m) 2^{\log_2 m} - 2^{\log_2 m} + 1 = m \log_2 m - m + 1.
+			\end{equation*}
+			Now, for large $m$ the terms in $-m + 1$ become negligible so that
+			\begin{equation*}
+				t_m = O(m \log_2 m) \qquad \text{as $m \to \infty$}.
+			\end{equation*}
+			In other words $t_n \sim n \log_2 n$ for large $n$.
+		\end{enumerate}
+		
+		\item The 28-state machine
+		\begin{center}
+			INC + INC + INC + INC + INC + EXP,
+		\end{center}
+		which we will name M is as follows.
+		\begin{center}
+			\begin{tabular}{ |c|c|c| }
+				\multicolumn{1}{c}{} & \multicolumn{1}{c}{\textbf{0}} & \multicolumn{1}{c}{\textbf{1}} \\ \hline
+				0 & 1R1 & 1L0 \\ \hline
+				1 & 2R2 & 2L1 \\ \hline
+				2 & 3R3 & 3L2 \\ \hline
+				
+				3 & 4R4 & 4L3 \\ \hline
+				4 & 5R5 & 5L4 \\ \hline
+				\specialcell{5\\ \raisebox{0.45 em}{\vdots} \\ 27} & \multicolumn{2}{c|}{\specialcell{EXP}} \\ \hline
+			\end{tabular}
+		\end{center}
+		When started on a blank tape, the first five states, which comprise the machine
+		\begin{center}
+			INC + INC + INC + INC + INC,
+		\end{center}
+		will set $n = 5$. Now EXP will be run with $n = 5$ so that $m = {{{2^2}^2}^2}^2$ is calculated.
+		
+		In calculating $m$, EXP must write at least $m$ 1's to the tape, each time having to perform at least one step. Also, since INC and EXP both halt M does too. Therefore,
+		\begin{equation*}
+				\beta(28) \ge {{{2^2}^2}^2}^2 > 2 \times 10^{19728}.
+		\end{equation*}
+		
+		\item
+		\begin{enumerate}
+			\item We will use the extended Euclidean algorithm and work backwards to find an expression of the form $1 = a x + b y$. We have
+			\begin{align*}
+				211 \div 135 &= 1 \text r \, 76, \\
+				135 \div 76 &= 1 \text r \, 59, \\
+				76 \div 59 &= 1 \text r \, 17, \\
+				59 \div 17 &= 3 \text r \, 8, \\
+				17 \div 8 &= 2 \text r \, 1
+			\end{align*}
+			so that
+			\begin{align*}
+				1 &= 17 - 8 \times 2, && \text{(working backwards)} \\
+				  &= 17 - (59 - 17 \times 3) \times 2, && \text{(working backwards)} \\
+				  &= 17 \times 7 - 59 \times 2, && \text{(collecting like terms)} \\
+				  &= (76 - 59) \times 7 - 59 \times 2, && \text{(working backwards)} \\
+				  &= 76 \times 7 - 59 \times 9, && \text{(collecting like terms)} \\
+				  &= 76 \times 7 - (135 - 76) \times 9, && \text{(working backwards)} \\
+				  &= 76 \times 16 - 135 \times 9, && \text{(collecting like terms)} \\
+				  &= (211 - 135) \times 16 - 135 \times 9, && \text{(working backwards)} \\
+				  &= 211 \times 16 - 135 \times 25. && \text{(collecting like terms)}
+			\end{align*}
+			Thus the inverse of 135 modulo 211 is $- 25 \equiv 186$.
+			
+			\item We have
+			\begin{align*}
+				27^{68} & \equiv (- 4)^{68} \mod{31} \\
+				& = 4^{2 \times (31 - 1) + 8} = (4^{30})^2 \times 4^8 \\
+				& \equiv 1^2 \times 4^8 \mod{31}  && \text{(by Fermat's little theorem)} \\
+				& = {4^{3}}^2 \times 4^{2} = {64}^2 \times 4^{2}\\
+				& \equiv {2}^2 \times 4^{2} \mod{31} \\
+				& = 4^3 = 64 \\
+				& \equiv 2 \mod{31}.
+			\end{align*}
+			
+			\item Using Euler's totient function yields
+			\begin{equation*}
+				\varphi(48) = \varphi(2^4 \times 3) = 48 \left( 1 - \frac{1}{2} \right) \left( 1 - \frac{1}{3} \right) = 16
+			\end{equation*}
+			so that
+			\begin{align*}
+				(11^{16})^{300} \times 11^5 &\equiv 1^{300} \times 11^5 \mod{48} \\
+				&= (11^2)^2 \times 11 \\
+				&\equiv (25)^2 \times 11 \mod{48} \\
+				&= (5 \times 5)^2 \times 11 = 5^2 \times 5 \times 55 \\
+				&\equiv 5^2 \times 5 \times 7 \mod{48} \\
+				&\equiv 11 \mod{48}.
+			\end{align*}
+			
+			\item Applying Wilson's theorem we find
+			\begin{equation*}
+				38! = \frac{(41 - 1)!}{39 \times 40} \equiv \frac{- 1}{39 \times 40} \mod{41}
+			\end{equation*}
+			so that what is left is to solve the linear congruence equation
+			\begin{equation*}
+				- 39 \times 40 x \equiv 1 \mod 41
+			\end{equation*}
+			for $x \in \mathbb{N}$. Noting that $- 40 \equiv 1$ modulo 41 we obtain the reduced equation
+			\begin{align*}
+				39 x &\equiv 1 \mod 41.
+			\end{align*}
+			Now $x$ is the inverse of 39 modulo 41 so we can use the extended Euclidean algorithm. We have
+			\begin{align*}
+				41 \div 39 &= 1 \text r \, 2, \\
+				39 \div 2 &= 19 \text r \, 1
+			\end{align*}
+			so that, by back substitution,
+			\begin{align*}
+				1 &= 39 - 19 \times 2 \\
+				  &= 39 - 19 \times (41 - 39) \\
+				  &= 39 \times 20 - 19 \times 41.
+			\end{align*}
+			Therefore the remainder of $38! \div 41$ is 20.
+		\end{enumerate}
+		
+		\item
+		\begin{enumerate}
+			\item The encoded message is
+			\begin{equation*}
+				m' \equiv 31^{17} \equiv 633511  \mod{746003}.
+			\end{equation*}
+			
+			\item Seeing as $\varphi(n_E) = \varphi(746003)$ divides $e_E d_E - 1 = 17 \times 218873 - 1$, we must have
+			\begin{equation*}
+				e_E d_E - 1 = k \varphi(n_E) = k (p - 1) (q - 1)
+			\end{equation*}
+			for some $k \in \mathbb{Z}$. Now, as $\varphi(n) < n$ and $\varphi(n) \approx n$  for large $n$, we have
+			\begin{equation*}
+				k > \frac{e_E d_E - 1}{n_E} = \frac{3720840}{746003} \approx 4.99.
+			\end{equation*}
+			Hence, let us try $k = 5$, which gives
+			\begin{equation}
+				(p - 1) (q - 1) = \frac{3720840}{5} = 744168. \label{eq:thing}
+			\end{equation}
+			Combining $pq = n_E = 746003$ with \eqref{eq:thing} we see that one solution is
+			\begin{equation*}
+				p = 607 \qquad \text{and} \qquad q = 1229.
+			\end{equation*}
+			
+			\item Using the primes found in the previous part we have
+			\begin{equation*}
+				\varphi(746003) = 746003 \left( 1 - \frac{1}{607} \right) \left( 1 - \frac{1}{1229} \right) = 744168.
+			\end{equation*}
+			
+			\item The decoding key for Alice is the multiplicative inverse of 7 modulo $\varphi(746003)$ = 744168. Applying the extended Euclidean algorithm we find
+			\begin{align*}
+				744168 \div 7 &= 106309 \text r \, 5, \\
+				7 \div 5 &= 1 \text r \, 2 \\
+				5 \div 2 &= 2 \text r \, 1
+			\end{align*}
+			so that
+			\begin{align*}
+				1 &= 5 - 2 \times 2 \\
+				  &= 5 - (7 - 5) \times 2  \\
+				  &= 5 \times 3 - 7 \times 2 \\
+				  &= (744168 - 106309 \times 7) \times 3 - 7 \times 2 \\
+				  &= 744168 \times 3 - 7 \times 318929
+			\end{align*}
+			Therefore, Alice's decoding key is $- 318929$ mod $744168 = 425239$.
+			
+			\item Reducing $242435^{425239}$ mod 746003 we see that the original message is 23517.
+		\end{enumerate}
+		
+		\item[] \textbf{[bonus marks]}
+		
+		Seeing as $\varphi(m)$ divides $1019 \times 136859 - 1 = 139459320$, we must have
+		\begin{equation*}
+			139459320 = k (p - 1) (q - 1)
+		\end{equation*}
+		for some $k \in \mathbb{Z}$. Now, as $\varphi(m) < m$ and $\varphi(m) \approx m$  for large $m$, we have
+		\begin{equation*}
+			k > \frac{139459320}{m} = \frac{139459320}{295927} \approx 471.26.
+		\end{equation*}
+		Hence, let us try $k = 472$, which gives
+		\begin{equation*}
+			(p - 1) (q - 1) = \frac{139459320}{472} \approx 295464.66.
+		\end{equation*}
+		Then $k = 473$,
+		\begin{equation}
+			\varphi(m) = (p - 1) (q - 1) = \frac{139459320}{473} = 294840. \label{eq:thing2}
+		\end{equation}
+		Combining $pq = 295927$ with \eqref{eq:thing2} we see that the solution is
+		\begin{equation*}
+			p = 541 \qquad \text{and} \qquad q = 547.
+		\end{equation*}
+		Now, the decoding exponent is the multiplicative inverse of 11 modulo $\varphi(m)$, which is 80411. The reader is encouraged to fill in the details here as the author is feeling sleepy.
+		
+		Reducing $227687^{80411}$ modulo $295927$ by computer yields 53110. Proceeding similarly with the remaining groups of digits yields the decrypted message
+		\begin{center}
+			53110, 6866, 10012, 3611, 5085, 20094, 20859, 27689, 24015, 39755. 21167, 51240.
+		\end{center}
+		Converting the first group from decimal to base-41, we have the sequence $31 \, 24 \, 15$---that is, T M D. Performing the conversion on the other groups using the code in appendix \ref{App:AppendixA} we come to the conclusion that
+		\begin{center}
+			\verb
+			DMTH237:42510023: TEACHES COOL MATHS
+		\end{center}
+		with the first colon at $k = 8$, assuming the initial `D' is the $k = 1^{\text{st}}$ character. Notice that in decoding the message we had to reverse the characters T M D, along with the characters in the other groups.
+	\end{enumerate}
+	
+	\newpage
+	\appendix
+	\section{Code Listing} \label{App:AppendixA}
+	The code used to convert from base-10 to base-41, written in Python 3, is show below.
+	\begin{verbatim}
+		def str (number):
+		   chars = "0123456789 ABCDEFGHIJKLMNOPQRSTUVWXYZ,:."
+		
+		   result = ''
+		   while number != 0:
+		      number, rdigit = divmod(number, 41)
+		      result = result + chars[rdigit-1]
+		   
+		   return result
+		
+		def msg ():
+		   decoded = [53110, 6866, 10012, 3611, 5085, 20094,
+		             20859, 27689, 24015, 39755, 21167, 51240]
+		   for n in decoded:
+		      print(str(n), end = "")
+	\end{verbatim}
+\end{document}

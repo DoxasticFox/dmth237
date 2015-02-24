@@ -1,0 +1,258 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[
+	top=1.00in,
+	bottom=1.25in,
+	left=0.75in,
+	right=0.75in
+]{geometry}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+% Used to allow [cc|c] in     \begin{pmatrix}[cc|c]...\end{pmatrix}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}
+}
+\makeatother
+
+\begin{document}
+	\title{DMTH237 Discrete Mathematics II --- Assignment 3}
+	\author{Christian Nassif-Haynes}
+	\date{\today}
+	\maketitle
+		
+	\begin{enumerate}
+		\item
+		\begin{enumerate}
+			\item \label{itm:allpwd} We have $26 \times 2 + 10 + 6 = 68$ available characters. Hence, there are $68^8 + 68^9 + 68^{10} + 68^{11} + 68^{12} = 9,920,671,339,261,325,541,376$ different passwords.
+			
+			\item \label{itm:atleastone} With only letters and numbers we have $26 \times 2 + 10 = 62$ characters so that there are $62^8 + 62^9 + 62^{10} + 62^{11} + 62^{12}$ passwords which {\it do not} contain at least one special character. Subtracting this from the number of passwords found in part \ref{itm:allpwd} we have
+			\begin{align*}
+				& (68^8 + 68^9 + 68^{10} + 68^{11} + 68^{12}) - (62^8 + 62^9 + 62^{10} + 62^{11} + 62^{12}) \\
+				&= 6,641,514,961,387,068,437,760
+			\end{align*}
+			which is the number of passwords not containing at least one special character.
+			
+			\item Checking each password would take 314.6 billion years (short scale)---about 23 times the age of the universe!
+		\end{enumerate}
+		
+		\item To solve this problem we note the following.
+		\begin{itemize}
+			\item Without restricting the value of each digit we have $10^9$ possible strings.
+			\item There are $9^9$ strings which do not contain the digit $1$ but may contain $3$ or $7$.
+			\item There are $9^9 - 8^9$ strings which do not contain the digit $3$, contain at least a single $1$ and may contain a $7$. This is a problem of the same kind as in part \ref{itm:atleastone}.
+			\item There are $9^9 - 2(8^9 - 7^9) - 7^9$ strings which do not contain the digit $7$ but contain at least a single $1$ and at least a single $3$. This is because there are $8^9 - 7^9$ strings which do not contain the digits $1$ and $7$ but contain at least a single $3$; there are $8^9 - 7^9$ strings which do not contain the digits $3$ and $7$ but contain at least a single $1$ and; there are $7^9$ strings which do not contain the digits $1$, $3$ or $7$.
+		\end{itemize}
+		From this we see that the number of strings which have $1$, $3$ and $7$ appearing at least once is given by
+		\begin{align*}
+			& \left( 10^9 \right) - \left( 9^9 \right) - \left( 9^9 - 8^9 \right) - \left( 9^9 - 2(8^9 - 7^9) - 7^9 \right) \\
+			&= 200,038,110.
+		\end{align*}
+		
+		\item
+		\begin{enumerate}
+			\item A teacher has $n$ students and asks them all $m$ questions. Any student who gets a question correct gets a piece of candy. (It is possible that no student is correct, so that no one gets candy.)
+			
+			Now, if $r$ questions are answered correctly there are
+			\begin{equation*}
+				\binom{n + r - 1}{r}
+			\end{equation*}
+			ways the candy might be distributed among the students. By the rule of sum,
+			\begin{equation*}
+				\sum\limits_{r=0}^{m} \binom{n + r - 1}{r}
+			\end{equation*}
+			is the number of different distributions of candy for a varying number of correct answers.
+			
+			The RHS,
+			\begin{equation*}
+				\binom{n + m}{m},
+			\end{equation*}
+			is then the number of ways to distribute the students among the candy, including the case where no students answer correctly.
+			
+			\item First we show that the base case (where $m = 0$) holds.
+			\begin{align}
+				\sum\limits_{r=0}^{m} \binom{n + r - 1}{r} &= \binom{n + m}{m} \label{eq:q3} \\
+				\sum\limits_{r=0}^{0} \binom{n + r - 1}{r} &= \binom{n + 0}{0} \notag \\
+				\binom{n + 0 - 1}{0} &= \binom{n + 0}{0} \notag \\
+				1 &= 1 \notag
+			\end{align}
+			
+			Now, in order to undertake the inductive step we will use
+			\begin{equation}
+				\sum\limits_{j = 0}^{n} \binom{j}{k} = \binom{n+1}{k+1}, \qquad \text{for every $n, k \in \mathbb{N}$} \label{eq:lemma}
+			\end{equation}
+			which, for completeness, we prove as follows:
+			\begin{align*}
+				\sum\limits_{j = 0}^{n} \binom{j}{k} &= \sum\limits_{j = 0}^{n} \left[ \binom{j+1}{k+1} - \binom{j}{k+1} \right] \\
+				&= \left[ \binom{1}{k+1} - \binom{0}{k+1} \right] + 
+				\left[ \binom{2}{k+1} - \binom{1}{k+1} \right] + \\
+				& \quad \left[ \binom{3}{k+1} - \binom{2}{k+1} \right] + \cdots
+				+ \left[ \binom{n+1}{k+1} - \binom{n}{k+1} \right] \\
+				&= - \binom{0}{k+1} + \left[ \binom{1}{k+1} - \binom{1}{k+1} \right] + 
+				\left[ \binom{2}{k+1} - \binom{2}{k+1} \right] \\
+				& + \cdots
+				+ \left[ \binom{n}{k+1} - \binom{n}{k+1} \right] + \binom{n+1}{k+1} \\
+				&= \binom{n+1}{k+1}.
+			\end{align*}
+			
+			Completing the inductive step, we must have
+			\begin{align*}
+				\sum\limits_{r=0}^{m+1} \binom{n + r - 1}{r} &= \binom{n + m+1}{m+1} && \text{(by the induction hypothesis)} \\
+				\sum\limits_{r=0}^{m+1} \binom{n + r - 1}{n-1} &= \binom{n + m+1}{m+1} && \text{($n$ choose $k$ equals $n$ choose $n-k$)} \\
+				\sum\limits_{s=n-1}^{n + m} \binom{s}{n-1} &= \binom{n + m+1}{m+1} && \text{(letting $s = n + r - 1$)} \\
+				\binom{n + m + 1}{n-1+1} &= \binom{n + m+1}{m+1} && \text{(by equation \eqref{eq:lemma})} \\
+				\binom{n + m+1}{m+1} &= \binom{n + m+1}{m+1}, && \text{($n$ choose $k$ equals $n$ choose $n-k$)}
+			\end{align*}
+			which was to be proved.
+		\end{enumerate}
+		
+		\item Two integers $a_i, a_{i+1}$ are consecutive if $a_{i+1} > a_i + 1$. Hence we have
+		\begin{equation*}
+			1 \le a_1 < a_2 - 1 < a_3 - 2 < a_4 - 3 < a_5 - 4 < a_6 - 5 < a_7 - 6 \le 50 - 6.
+		\end{equation*}
+		Writing $b_i = a_i - (i-1)$, we have
+		\begin{equation*}
+			1 \le b_1 < b_2 < \cdots < b_7 \le 44.
+		\end{equation*}
+		Now there clearly exists a bijection between every $a_i, b_i$. Thus, the number of ways to choose $a_i, 1 \le i \le 7$ is equal to the number of ways to choose $b_i, 1 \le i \le 7$.
+		
+		The number of ways to choose the seven different numbers is therefore
+		\begin{equation*}
+			\binom{44+1}{7} = 45,379,620.
+		\end{equation*}
+		
+		\item The left and right machines accept the languages $\mathcal{L}$ and $\mathcal{M}$. Their respective state tables are show below.
+		\begin{center}
+			\begin{tabular}{r|c|c|l}
+				\cline{2-3}
+				& {\bf 0} & {\bf 1} & \\ \cline{2-3}
+				$\to A$	 & $B$ & $C$ &        \\ \cline{2-3}
+				$B$	 	 & $D$ & $E$ &        \\ \cline{2-3}
+				$C$	 	 & $F$ & $Z$ &        \\ \cline{2-3}
+				$D$	 	 & $Z$ & $Z$ & $\ast$ \\ \cline{2-3}
+				$E$	 	 & $G$ & $G$ & $\ast$ \\ \cline{2-3}
+				$F$	 	 & $Z$ & $Z$ & $\ast$ \\ \cline{2-3}
+				$G$	 	 & $Z$ & $A$ &        \\ \cline{2-3}
+				$Z$	 	 & $Z$ & $Z$ &        \\ \cline{2-3}
+			\end{tabular}
+			\qquad
+			\begin{tabular}{r|c|c|l}
+				\cline{2-3}
+				& {\bf 0} & {\bf 1} & \\ \cline{2-3}
+				$\to R$	 & $S$ & $R$ & $\ast$ \\ \cline{2-3}
+				$S$	 	 & $T$ & $S$ &        \\ \cline{2-3}
+				$T$	 	 & $R$ & $T$ &        \\ \cline{2-3}
+			\end{tabular}
+		\end{center}
+		The state tables for the machines which accept the languages $\overline{\mathcal{L}}$ and $\overline{\mathcal{M}}$ are shown below.
+		\begin{center}
+			\begin{tabular}{r|c|c|l}
+				\cline{2-3}
+				& {\bf 0} & {\bf 1} & \\ \cline{2-3}
+				$\to A$	 & $B$ & $C$ & $\ast$ \\ \cline{2-3}
+				$B$	 	 & $D$ & $E$ & $\ast$ \\ \cline{2-3}
+				$C$	 	 & $F$ & $Z$ & $\ast$ \\ \cline{2-3}
+				$D$	 	 & $Z$ & $Z$ &        \\ \cline{2-3}
+				$E$	 	 & $G$ & $G$ &        \\ \cline{2-3}
+				$F$	 	 & $Z$ & $Z$ &        \\ \cline{2-3}
+				$G$	 	 & $Z$ & $A$ & $\ast$ \\ \cline{2-3}
+				$Z$	 	 & $Z$ & $Z$ & $\ast$ \\ \cline{2-3}
+			\end{tabular}
+			\qquad
+			\begin{tabular}{r|c|c|l}
+				\cline{2-3}
+				& {\bf 0} & {\bf 1} & \\ \cline{2-3}
+				$\to R$	 & $S$ & $R$ &        \\ \cline{2-3}
+				$S$	 	 & $T$ & $S$ & $\ast$ \\ \cline{2-3}
+				$T$	 	 & $R$ & $T$ & $\ast$ \\ \cline{2-3}
+			\end{tabular}
+		\end{center}
+		Combining the above tables to find a finite state acceptor for the language $\overline{\mathcal{L}} + \overline{\mathcal{M}}$ yields the mutually equivalent machines shown below.
+		\begin{center}
+			\begin{tabular}{r|c|c|c|l}
+				\cline{2-4}
+				& {\bf 0}& {\bf 1} & $\lambda$ & \\ \cline{2-4}
+				$\to A_0$&	   &	 & $AR$  &        \\ \cline{2-4}
+				$A$	 	 & $B$ & $C$ &       & $\ast$ \\ \cline{2-4}
+				$B$	 	 & $D$ & $E$ &       & $\ast$ \\ \cline{2-4}
+				$C$	 	 & $F$ & $Z$ &       & $\ast$ \\ \cline{2-4}
+				$D$	 	 & $Z$ & $Z$ &       &        \\ \cline{2-4}
+				$E$	 	 & $G$ & $G$ &       &        \\ \cline{2-4}
+				$F$	 	 & $Z$ & $Z$ &       &        \\ \cline{2-4}
+				$G$	 	 & $Z$ & $A$ &       & $\ast$ \\ \cline{2-4}
+				$Z$	 	 & $Z$ & $Z$ &       & $\ast$ \\ \cline{2-4}
+				$R$  	 & $S$ & $R$ &       &        \\ \cline{2-4}
+				$S$	 	 & $T$ & $S$ &       & $\ast$ \\ \cline{2-4}
+				$T$	 	 & $R$ & $T$ &       & $\ast$ \\ \cline{2-4}
+			\end{tabular}
+			\qquad
+			\begin{tabular}{r|c|c|l}
+				\cline{2-3}
+				& {\bf 0}& {\bf 1} & \\ \cline{2-3}
+				$\to AR$ & $BS$ & $CR$ & $\ast$ \\ \cline{2-3}
+				$BS$	 & $CR$ & $ES$ & $\ast$ \\ \cline{2-3}
+				$CR$	 & $CR$ & $CR$ & $\ast$ \\ \cline{2-3}
+				$ES$	 & $GT$ & $GS$ & $\ast$ \\ \cline{2-3}
+				$GT$	 & $CR$ & $AT$ & $\ast$ \\ \cline{2-3}
+				$GS$	 & $CR$ & $AS$ & $\ast$ \\ \cline{2-3}
+				$AT$	 & $BR$ & $CT$ & $\ast$ \\ \cline{2-3}
+				$AS$	 & $BT$ & $CR$ & $\ast$ \\ \cline{2-3}
+				$BR$	 & $CR$ & $ER$ & $\ast$ \\ \cline{2-3}
+				$CT$	 & $FR$ & $CR$ & $\ast$ \\ \cline{2-3}
+				$BT$	 & $FR$ & $ET$ & $\ast$ \\ \cline{2-3}
+				$ER$	 & $GS$ & $GR$ &  \\ \cline{2-3}
+				$FR$	 & $CR$ & $CR$ &  \\ \cline{2-3}
+				$ET$	 & $GR$ & $GT$ & $\ast$ \\ \cline{2-3}
+				$GR$	 & $CR$ & $AR$ & $\ast$ \\ \cline{2-3}
+			\end{tabular}
+			\qquad
+			\begin{tabular}{r|c|c|l}
+				\cline{2-3}
+				& {\bf 0}& {\bf 1} & \\ \cline{2-3}
+				$\to 0$& $1$  & $2$  & $\ast$ \\ \cline{2-3}
+				$1$	   & $2$  & $3$  & $\ast$ \\ \cline{2-3}
+				$2$	   & $2$  & $2$  & $\ast$ \\ \cline{2-3}
+				$3$	   & $4$  & $5$  & $\ast$ \\ \cline{2-3}
+				$4$	   & $2$  & $6$  & $\ast$ \\ \cline{2-3}
+				$5$	   & $2$  & $7$  & $\ast$ \\ \cline{2-3}
+				$6$	   & $8$  & $9$  & $\ast$ \\ \cline{2-3}
+				$7$	   & $10$ & $2$  & $\ast$ \\ \cline{2-3}
+				$8$	   & $2$  & $11$ & $\ast$ \\ \cline{2-3}
+				$9$	   & $12$ & $2$  & $\ast$ \\ \cline{2-3}
+				$10$   & $12$ & $13$ & $\ast$ \\ \cline{2-3}
+				$11$   & $5$  & $14$ &        \\ \cline{2-3}
+				$12$   & $2$  & $2$  &        \\ \cline{2-3}
+				$13$   & $14$ & $4$  & $\ast$ \\ \cline{2-3}
+				$14$   & $2$  & $0$  & $\ast$ \\ \cline{2-3}
+			\end{tabular}
+		\end{center}
+		Hence, we have the machine accepting strings in the language $\mathcal{L} \cap \mathcal{M}$, shown below.
+		\begin{center}
+			\begin{tabular}{r|c|c|l}
+				\cline{2-3}
+				& {\bf 0}& {\bf 1} & \\ \cline{2-3}
+				$\to 0$& $1$  & $2$  &        \\ \cline{2-3}
+				$1$	   & $2$  & $3$  &        \\ \cline{2-3}
+				$2$	   & $2$  & $2$  &        \\ \cline{2-3}
+				$3$	   & $4$  & $5$  &        \\ \cline{2-3}
+				$4$	   & $2$  & $6$  &        \\ \cline{2-3}
+				$5$	   & $2$  & $7$  &        \\ \cline{2-3}
+				$6$	   & $8$  & $9$  &        \\ \cline{2-3}
+				$7$	   & $10$ & $2$  &        \\ \cline{2-3}
+				$8$	   & $2$  & $11$ &        \\ \cline{2-3}
+				$9$	   & $12$ & $2$  &        \\ \cline{2-3}
+				$10$   & $12$ & $13$ &        \\ \cline{2-3}
+				$11$   & $5$  & $14$ & $\ast$\textbf{      } \\ \cline{2-3}
+				$12$   & $2$  & $2$  & $\ast$ \\ \cline{2-3}
+				$13$   & $14$ & $4$  &        \\ \cline{2-3}
+				$14$   & $2$  & $0$  &        \\ \cline{2-3}
+			\end{tabular}
+		\end{center}
+	\end{enumerate}
+\end{document}
